@@ -2,6 +2,8 @@ import turtle
 
 s = turtle.Screen()
 p = turtle.Pen()
+p.shape('turtle')
+# 'arrow', 'turtle', 'circle', 'square', 'triangle', 'classic'
 s.bgcolor('black')
 COLORS = ['red', 'green', 'blue', 'yellow', 'purple']
 
@@ -32,6 +34,10 @@ p.pendown()
 p.pencolor('olive')
 p.write("hello every body", font=("Arial", 12, 'italic'))
 p.hideturtle()
+# p.ht()
 
 
 s.exitonclick()
+
+
+# باید ساعت انیمیشنی ساخته بشه
