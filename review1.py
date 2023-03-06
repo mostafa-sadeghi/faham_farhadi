@@ -66,7 +66,7 @@ b = 4
 #     print("a is greater than or equal to b.")
 # if a < b:
 #     print("a is lower than b.")
-if a > b:
-    print("a is greater than b.")
-if a <= b:
-    print("a is lower than or equal to b.")
+# if a > b:
+#     print("a is greater than b.")
+# if a <= b:
+#     print("a is lower than or equal to b.")
