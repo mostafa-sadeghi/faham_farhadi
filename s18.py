@@ -50,16 +50,16 @@
 age = 8
 
 
-if age < 8:
-    print("you are kid...")
-    print("you are readt to go school")
+# if age < 8:
+#     print("you are kid...")
+#     print("you are readt to go school")
 
-if age >= 8 and age < 13:
-    print("you are junior.")
+# if age >= 8 and age < 13:
+#     print("you are junior.")
 
-if age >= 13 and age <18:
-    print('you are teenager.')
+# if age >= 13 and age <18:
+#     print('you are teenager.')
 
-if age >= 18:
-    print("you are adult.")
-    print("you are ready to go to university")
+# if age >= 18:
+#     print("you are adult.")
+#     print("you are ready to go to university")
