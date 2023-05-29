@@ -29,6 +29,16 @@ def go_down():
         head.direction = "down"
 
 
+def go_right():
+    if head.direction != "left":
+        head.direction = "right"
+
+
+def go_left():
+    if head.direction != "right":
+        head.direction = "left"
+
+
 win = turtle.Screen()
 win.register_shape("strawberry.gif")
 win.title("Our first game")
@@ -39,6 +49,8 @@ win.tracer(0)
 win.listen()
 win.onkey(go_up, "w")
 win.onkey(go_down, "s")
+win.onkey(go_right, "d")
+win.onkey(go_left, "a")
 
 
 head = turtle.Turtle()
@@ -53,33 +65,36 @@ head.direction = "stop"
 
 food = turtle.Turtle()
 food.speed('fastest')
-food.shape("strawberry.gif")
-food.shapesize(0.1,0.1)
+food.shape("circle")
 food.color("red")
 
 food.penup()
-# food.shapesize(0.5, 0.5)
+food.shapesize(0.5, 0.5)
 food.goto(0, 0)
 
 segments = []
 
 while True:
-    # if head.distance(food) < 15:
-    #     x = random.randint(-290, 290)
-    #     y = random.randint(-290, 290)
-    #     food.goto(x, y)
-    #     new_segment = turtle.Turtle()
-    #     new_segment.speed("fastest")
-    #     new_segment.shape("square")
-    #     new_segment.color("grey")
-    #     new_segment.penup()
-    #     segments.append(new_segment)
-
-    # for index in range(len(segments)-1, 0, -1):
-    #     x = segments[index-1].xcord()
-    #     y = segments[index-1].ycord()
-    #     segments[index].goto(x, y)
-
     win.update()
+    if head.distance(food) < 15:
+        x = random.randint(-290, 290)
+        y = random.randint(-290, 290)
+        food.goto(x, y)
+        new_segment = turtle.Turtle()
+        new_segment.speed("fastest")
+        new_segment.shape("square")
+        new_segment.color("grey")
+        new_segment.penup()
+        segments.append(new_segment)
+
+    for index in range(len(segments)-1, 0, -1):
+        x = segments[index-1].xcor()
+        y = segments[index-1].ycor()
+        segments[index].goto(x, y)
+
+    if len(segments):
+        x = head.xcor()
+        y = head.ycor()
+        segments[0].goto(x, y)
     move()
     time.sleep(delay)
