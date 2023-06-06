@@ -1,7 +1,10 @@
 import turtle
 import time
 import random
-delay = 0.1
+delay = 0.2
+
+
+high_score = 0
 
 
 def move():
@@ -40,27 +43,27 @@ def go_left():
 
 
 win = turtle.Screen()
-win.register_shape("strawberry.gif")
+# win.register_shape("strawberry.gif")
 win.title("Our first game")
 win.bgcolor('blue')
 
 win.setup(width=600, height=600)
 win.tracer(0)
 win.listen()
-win.onkey(go_up, "w")
-win.onkey(go_down, "s")
-win.onkey(go_right, "d")
-win.onkey(go_left, "a")
+win.onkey(go_up, "Up")
+win.onkey(go_down, "Down")
+win.onkey(go_right, "Right")
+win.onkey(go_left, "Left")
 
 
 head = turtle.Turtle()
-head.speed('fastest')
+head.speed('fast')
 head.shape("square")
 
 head.color("black")
 head.penup()
 head.goto(0, 100)
-head.direction = "stop"
+head.direction = ""
 
 
 food = turtle.Turtle()
@@ -72,16 +75,26 @@ food.penup()
 food.shapesize(0.5, 0.5)
 food.goto(0, 0)
 
+pen_for_score = turtle.Turtle()
+pen_for_score.speed('fastest')
+pen_for_score.ht()
+pen_for_score.penup()
+pen_for_score.goto(0, 260)
+pen_for_score.write(
+    f"Score: 0 Hight Score: {high_score}", align="center", font=("Arial", 24))
+
+
 segments = []
 
 while True:
     win.update()
+
     if head.distance(food) < 15:
-        x = random.randint(-290, 290)
-        y = random.randint(-290, 290)
+        x = random.randint(-260, 260)
+        y = random.randint(-260, 260)
         food.goto(x, y)
         new_segment = turtle.Turtle()
-        new_segment.speed("fastest")
+        new_segment.speed("fast")
         new_segment.shape("square")
         new_segment.color("grey")
         new_segment.penup()
@@ -96,5 +109,24 @@ while True:
         x = head.xcor()
         y = head.ycor()
         segments[0].goto(x, y)
+
+    if head.xcor() > 290 or head.xcor() < -290 or head.ycor() > 290 or head.ycor() < -290:
+        time.sleep(.4)
+        head.goto(0, 0)
+        head.direction = ""
+        for body in segments:
+            body.ht()
+        segments = []
+
     move()
+
+    for body in segments:
+        if body.distance(head) < 15:
+            time.sleep(.4)
+            head.goto(0, 0)
+            head.direction = ""
+            for body in segments:
+                body.ht()
+            segments = []
+
     time.sleep(delay)
