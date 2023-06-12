@@ -5,6 +5,7 @@ delay = 0.2
 
 
 high_score = 0
+score = 0
 
 
 def move():
@@ -81,7 +82,7 @@ pen_for_score.ht()
 pen_for_score.penup()
 pen_for_score.goto(0, 260)
 pen_for_score.write(
-    f"Score: 0 Hight Score: {high_score}", align="center", font=("Arial", 24))
+    f"Score: 0 High Score: {high_score}", align="center", font=("Arial", 24))
 
 
 segments = []
@@ -90,6 +91,10 @@ while True:
     win.update()
 
     if head.distance(food) < 15:
+        score += 1
+        pen_for_score.clear()
+        pen_for_score.write(
+            f"Score: {score} High Score: {high_score}", align="center", font=("Arial", 24))
         x = random.randint(-260, 260)
         y = random.randint(-260, 260)
         food.goto(x, y)
@@ -111,6 +116,13 @@ while True:
         segments[0].goto(x, y)
 
     if head.xcor() > 290 or head.xcor() < -290 or head.ycor() > 290 or head.ycor() < -290:
+        # TODO   اصلاح بیشترین امتیاز زمانی که امتیاز ما از قبلی کمتر باشه
+        # TODO اضافه کردن خط به گوشه های صفحه
+        high_score = score
+        score = 0
+        pen_for_score.clear()
+        pen_for_score.write(
+            f"Score: {score} High Score: {high_score}", align="center", font=("Arial", 24))
         time.sleep(.4)
         head.goto(0, 0)
         head.direction = ""
